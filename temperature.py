@@ -8,10 +8,8 @@ print("Durchschnittstemperatur:", average)
 print("Höchste Temperatur:", max(temperature))
 print("Niedrigste Temperatur:", min(temperature))
 
-def check_temperature(temperatures):
-    average = sum(temperatures) / len(temperatures)
-    
-    if average > 20:
-        print("Woche war warm!")
-    else:
-        print("Woche war eher kühl")
+  
+if average > 20:
+     print("Woche war warm!")
+else:
+    print("Woche war eher kühl")
