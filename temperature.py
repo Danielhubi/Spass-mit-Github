@@ -1,6 +1,6 @@
 #Temperaturen auswerten
 
-temperature = [14, 18, 21, 20, 19, 16, 15]
+temperature = [14, 18, 21, 20, 19, 16, 15, 1, 99, 23]
 
 average = sum(temperature) / len(temperature)
 print("Durchschnittstemperatur:", average)
