@@ -13,3 +13,8 @@ if average > 20:
      print("Woche war warm!")
 else:
     print("Woche war eher kühl")
+
+def counttempOver18(input_list:list):
+     return len([x for x in input_list if x > 18])
+
+print(counttempOver18(temperature))
