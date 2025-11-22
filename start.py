@@ -11,7 +11,8 @@ feed_data = [
     "Dieser Post ist nur Fülltext.",
     "SPAM! Nicht klicken! SPAM!",
     "Ich mag Tupel, weil sie unveränderlich sind.",
-    "Hallo nochmal, Welt! @PythonUser123"
+    "Hallo nochmal, Welt! @PythonUser123",
+    "hallo"
 ]
 
 # Eine Liste von Wörtern, die moderiert werden sollen
@@ -23,14 +24,71 @@ def analyze_post(post_text):
     # Länge des Posts
     post_length = len(post_text)
 
-    # Prüfen, ob verdächtig
+    # Prüfen ob verdächtig, wenn weniger als 10 und mehr als 80 zeichen
     is_suspicious = post_length < 10 or post_length > 80
 
     # Hashtag zählen
     hashtag_count = post_text.count("#")
 
-    # Ergebnisse zurückgeben
     return (is_suspicious, post_length, hashtag_count)
 
 print("Hallo Welt! #python", analyze_post("Hallo Welt! #python"))
 print("Kurz", analyze_post("Kurz"))
+print("SPAM! Kaufen Sie jetzt! Billig! SPAM!", analyze_post("SPAM! Kaufen Sie jetzt! Billig! SPAM!"))
+print("Hallo Welt! Mein erstes Python-Projekt. #python #neu", analyze_post("Hallo Welt! Mein erstes Python-Projekt. #python #neu"))
+
+
+
+# 1. Anlegen
+valid_posts = []
+suspicious_posts = []
+
+# 2. Verarbeiten
+for item in feed_data:
+    analysis_result = analyze_post(item)        # Funktion aufrufen
+    is_suspicious, length, hashtags = analysis_result  # Tupel entpacken
+
+    # 3. Sortieren
+    if is_suspicious:
+        suspicious_posts.append(item)
+    else:
+        valid_posts.append(item)
+
+print("Analyse abgeschlossen.")
+print("Anzahl valider Posts:", len(valid_posts))
+print("Anzahl verdächtiger Posts:", len(suspicious_posts))
+
+
+unique_mentions = set()   # 1. Leeres Set
+
+for post in valid_posts:  # 2. Durch valid_posts iterieren
+    words = post.split()  # 3. Post in Wörter teilen
+
+    for word in words:    # 4. Durch jedes Wort iterieren
+        if word.startswith("@"):  # 5. Check: Mentions beginnen mit "@"
+            
+            # 6. Bereinigen: Satzzeichen entfernen (z.B. ",", "!")
+            cleaned = word.strip(".,!?;:")
+
+            unique_mentions.add(cleaned)
+
+# 7. Ergebnis ausgeben
+print("Einzigartige Mentions:", unique_mentions)
+
+
+forbidden_set=set(forbidden_words)
+
+def censor_feed(post_list, forbidden_set):
+    for i in range(len(post_list)):        # Wir brauchen den Index
+        post = post_list[i]                # Originalpost holen
+
+        for word in forbidden_set:         # Durch verbotene Wörter iterieren
+            post = post.replace(word, "***")
+
+        post_list[i] = post
+
+censor_feed(valid_posts, forbidden_set)
+
+print("Zensierte valid_posts:")
+for post in valid_posts:
+    print(post)
