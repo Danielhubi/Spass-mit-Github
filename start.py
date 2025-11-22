@@ -16,3 +16,21 @@ feed_data = [
 
 # Eine Liste von Wörtern, die moderiert werden sollen
 forbidden_words = ["SPAM", "Billig", "kaufen"]
+
+#Teil 1
+
+def analyze_post(post_text):
+    # Länge des Posts
+    post_length = len(post_text)
+
+    # Prüfen, ob verdächtig
+    is_suspicious = post_length < 10 or post_length > 80
+
+    # Hashtag zählen
+    hashtag_count = post_text.count("#")
+
+    # Ergebnisse zurückgeben
+    return (is_suspicious, post_length, hashtag_count)
+
+print("Hallo Welt! #python", analyze_post("Hallo Welt! #python"))
+print("Kurz", analyze_post("Kurz"))
