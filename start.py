@@ -92,3 +92,64 @@ censor_feed(valid_posts, forbidden_set)
 print("Zensierte valid_posts:")
 for post in valid_posts:
     print(post)
+
+
+while True:
+    print("\n--- Social-Media-O-Mat 9000 ---")
+    print("1: Neuen Post hinzufügen")
+    print("2: Alle validen Posts anzeigen")
+    print("3: Alle verdächtigen Posts anzeigen")
+    print("4: Einzigartige Mentions anzeigen")
+    print("q: Beenden")
+
+    choice = input("Wähle eine Option: ")
+
+    # Option q -> Schleife verlassen
+    if choice == "q":
+        print("Programm beendet. Auf Wiedersehen!")
+        break
+
+    # Option 1 -> neuen Post hinzufügen
+    elif choice == "1":
+        new_post = input("Gib den neuen Post ein: ")
+
+        # Analyse durchführen
+        is_suspicious, length, hashtags = analyze_post(new_post)
+
+        # Sortierung (Seiteneffekt!)
+        if is_suspicious:
+            suspicious_posts.append(new_post)
+            print("Post wurde als VERDÄCHTIG gespeichert.")
+        else:
+            valid_posts.append(new_post)
+            print("Post wurde als VALIDE gespeichert.")
+
+    # Option 2 -> valide Posts anzeigen
+    elif choice == "2":
+        print("\n--- Valide Posts ---")
+        if len(valid_posts) == 0:
+            print("(Keine vorhanden)")
+        else:
+            for p in valid_posts:
+                print("-", p)
+
+    # Option 3 -> verdächtige Posts anzeigen
+    elif choice == "3":
+        print("\n--- Verdächtige Posts ---")
+        if len(suspicious_posts) == 0:
+            print("(Keine vorhanden)")
+        else:
+            for p in suspicious_posts:
+                print("-", p)
+
+    # Option 4 -> einzigartige Mentions anzeigen
+    elif choice == "4":
+        print("\n--- Einzigartige Mentions ---")
+        if len(unique_mentions) == 0:
+            print("(Keine vorhanden)")
+        else:
+            for mention in unique_mentions:
+                print("-", mention)
+
+    else:
+        print("Ungültige Eingabe. Bitte erneut versuchen.")
