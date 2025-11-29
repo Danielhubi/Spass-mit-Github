@@ -104,19 +104,19 @@ while True:
 
     choice = input("Wähle eine Option: ")
 
-    # Option q -> Schleife verlassen
+ 
     if choice == "q":
         print("Programm beendet. Auf Wiedersehen!")
         break
 
-    # Option 1 -> neuen Post hinzufügen
+ 
     elif choice == "1":
         new_post = input("Gib den neuen Post ein: ")
 
-        # Analyse durchführen
+       
         is_suspicious, length, hashtags = analyze_post(new_post)
 
-        # Sortierung (Seiteneffekt!)
+     
         if is_suspicious:
             suspicious_posts.append(new_post)
             print("Post wurde als VERDÄCHTIG gespeichert.")
@@ -124,7 +124,7 @@ while True:
             valid_posts.append(new_post)
             print("Post wurde als VALIDE gespeichert.")
 
-    # Option 2 -> valide Posts anzeigen
+   
     elif choice == "2":
         print("\n--- Valide Posts ---")
         if len(valid_posts) == 0:
@@ -133,7 +133,7 @@ while True:
             for p in valid_posts:
                 print("-", p)
 
-    # Option 3 -> verdächtige Posts anzeigen
+    
     elif choice == "3":
         print("\n--- Verdächtige Posts ---")
         if len(suspicious_posts) == 0:
@@ -142,7 +142,7 @@ while True:
             for p in suspicious_posts:
                 print("-", p)
 
-    # Option 4 -> einzigartige Mentions anzeigen
+
     elif choice == "4":
         print("\n--- Einzigartige Mentions ---")
         if len(unique_mentions) == 0:
